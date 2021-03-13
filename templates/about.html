@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>About</title>
+    </head>
+    <body>
+        {% extends "template.html" %}
+        {% block content %}
+        <strong><nav>
+            <ul class="menu">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a class = 'active' href="{{ url_for('about') }}">About</a></li>
+            <li style='float:right'>
+            <form action='/' method='post'>  
+                <input type="text" id = "city" name = "city" placeholder="City"></br>
+                <button type="submit">Submit</button>
+            </form>
+            </li>
+            </ul>
+        </nav></strong>
+
+        <h1> About Weather.app</h1>
+        <p> This page is going to be a basic representation of the local weather</p>
+        <p> You will also be able to see forecasts of major cities around the United States, and later the world</p>
+        <p> Will hopefully eventually add map for weather locations with links. For now will keep it simple</p>
+        <p> Weather data provided by OpenWeatherMap API</p>
+
+        {% endblock %}}
+
+    
+    </body>
+</html>

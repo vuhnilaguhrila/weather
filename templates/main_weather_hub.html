@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang='en' dir-'ltr'>
+    <head>
+        <meta charset='utf-8'>
+    </head>
+
+    {% extends "template.html" %}
+  
+    {% block content %}
+    <body>
+        <strong><nav>
+            <ul class="menu">
+            <li><a class='active' href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li style='float:right'>
+            <form action='/' method='post'>  
+                <input type="text" id = "city" name = "city" placeholder="City"></br>
+                <button type="submit">Submit</button>
+            </form>
+            </li>
+            </ul>
+        </nav></strong>
+    <h2>{{location}}</h2>
+    <h2>{{current['weekday']}}, {{current['datelong']}}</h2>
+
+    <h2>{{current['event']}}</h2>
+    <p>{{current['eventdesc']}}</p>
+       
+        <!-- Table to hold daily information -->
+        <table>
+            <tr>
+            </tr>
+            <tr>
+                <td></td>
+                <td><b>{{current['temp']}}&deg</b></td>
+            </tr>
+            <tr>
+                <td>Feels like: </td>
+                <td>{{current['feel']}}&deg</td>
+            </tr>
+            <tr>
+                <td>Humidity: </td>
+                <td>{{current['hum']}}%</td>
+            </tr>
+            <tr>
+                <img src= "{{current['img']}}" alt="pic of weather">
+            </tr>
+            <tr>
+                <td>{{current['desc']}}</td>
+            </tr>
+        </table>
+    </br>
+    </br>
+    <!-- Additional daily information, to be displayed next to daily visual-->
+    <p1>Sunrise: {{current['sunrise']}}</p1></br>
+    <p1>Sunset: {{current['sunset']}}</p1></br>
+    <p1>Wind Speed: {{current['wspeed']}}mph</p1>
+    </br>
+    </br>
+    <!-- Graph of rainfall chance by the hour-->
+    <h2>Hourly</h2>
+    <img src='/static/css/hourly_forecast.png' alt='hourly_forecast_graph'>
+
+    </br>
+    </br>
+
+    <h2>8 Day Forecast</h2>
+        <!-- Table to hold weekly information -->
+        <table>
+            <tr>
+                {% for x in range(daily|length) %}
+                <td>
+                {{daily[x]['day']}}
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for x in range(daily|length) %}
+                <td>
+                <img src="{{daily[x]['img']}}" alt="daily weather pic">
+                </td>
+                {% endfor %}
+            </tr>    
+            <tr>
+                {% for x in range(daily|length) %}
+                <td>
+                <font color='red'>{{daily[x]['high']}}&deg</font>
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for x in range(daily|length) %}
+                <td>
+                {{daily[x]['avg']}}&deg    
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for x in range(daily|length) %}
+                <td>
+                <font color='blue'>{{daily[x]['low']}}&deg</font>
+                </td>
+                {% endfor %}
+            </tr>
+        </table>
+
+    
+
+        {% endblock %} 
+
+    </body>
+</html>
